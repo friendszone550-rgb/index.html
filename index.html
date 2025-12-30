@@ -85,15 +85,17 @@ audio{display:none}
 </style>
 </head>
 
-<body>
-
-<div class="floating">
-<span style="left:10%">💙</span>
-<span style="left:30%">✨</span>
-<span style="left:50%">💫</span>
-<span style="left:70%">💙</span>
-<span style="left:85%">✨</span>
-</div>
+/* FLOATING EMOJIS (NO LINE ISSUE) */
+setInterval(()=>{
+let f=document.createElement("div");
+f.className="float";
+f.innerHTML=["💙","✨","🤍","🌌"][Math.floor(Math.random()*4)];
+f.style.left=Math.random()*100+"vw";
+f.style.fontSize=14+Math.random()*20+"px";
+f.style.animationDuration=6+Math.random()*6+"s";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),12000);
+},500);
 
 <div class="card show" id="card">
 <h1>Happy New Year 🎆</h1>
