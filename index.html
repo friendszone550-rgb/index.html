@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever Love ❤️</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.hearts{
+  position:absolute;
+  inset:0;
+  background:url("https://i.imgur.com/8KQZ6ZK.png");
+  opacity:0.2;
+  animation: float 20s linear infinite;
+}
+
+@keyframes float{
+  from{background-position:0 0;}
+  to{background-position:0 -2000px;}
+}
+
+.card{
+  position:relative;
+  z-index:2;
+  width:92%;
+  max-width:420px;
+  background:rgba(255,255,255,0.95);
+  border-radius:25px;
+  padding:22px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
+  animation: fadeScale 1s ease;
+}
+
+@keyframes fadeScale{
+  from{opacity:0;transform:scale(0.8);}
+  to{opacity:1;transform:scale(1);}
+}
+
+h2{
+  color:#c9184a;
+  margin-bottom:10px;
+}
+
+p{
+  font-size:16px;
+  color:#333;
+  line-height:1.6;
+}
+
+img{
+  width:100%;
+  margin-top:15px;
+  border-radius:18px;
+  animation: slideUp 1s ease;
+}
+
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+button{
+  margin-top:18px;
+  padding:10px 30px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(45deg,#ff4d6d,#ff758f);
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+  100%{transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<div class="card" id="box">
+  <h2>Hey My Love ❤️</h2>
+  <p>Tap slowly… every page holds my heart 💕</p>
+  <button onclick="next()">Tap 💖</button>
+</div>
+
+<script>
+let step = 0;
+
+function next(){
+  const box = document.getElementById("box");
+  step++;
+
+  const content = [
+    `
+    <p>
+      The moment I saw you,<br>
+      my heart whispered — *this is home* 🥹❤️
+    </p>
+    <img src="love1.jpg">
+    <button onclick="next()">Next 💞</button>
+    `,
+    `
+    <p>
+      Your smile is my favorite place,<br>
+      I want to live there forever 😊💕
+    </p>
+    <img src="love2.jpg">
+    <button onclick="next()">More 😘</button>
+    `,
+    `
+    <p>
+      With you, even silence<br>
+      feels like a beautiful song 🎶❤️
+    </p>
+    <img src="love3.jpg">
+    <button onclick="next()">Again 💓</button>
+    `,
+    `
+    <p>
+      Every heartbeat of mine<br>
+      spells only one name — YOU ♾️
+    </p>
+    <img src="love4.jpg">
+    <button onclick="next()">One More 💗</button>
+    `,
+    `
+    <p>
+      No distance, no time,<br>
+      nothing can ever change us 💍
+    </p>
+    <img src="love5.jpg">
+    <button onclick="next()">Final ❤️</button>
+    `,
+    `
+    <h2>Forever & Always ❤️</h2>
+    <p>
+      If love had a face,<br>
+      it would look exactly like YOU 🥰
+    </p>
+    <img src="love6.jpg">
+    <p><b>— Yours Forever 💖</b></p>
+    `
+  ];
+
+  box.innerHTML = content[step-1];
+}
+</script>
+
+</body>
+</html>
