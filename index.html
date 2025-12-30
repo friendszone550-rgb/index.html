@@ -3,36 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forever Love ❤️</title>
+<title>My Love ❤️</title>
 
 <style>
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body{
-  height:100vh;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  min-height:100vh;
+  background:url("668150be77306056d91ff6ffa2aee180.jpg") no-repeat center/cover;
   display:flex;
   justify-content:center;
   align-items:center;
   overflow:hidden;
 }
 
-.hearts{
-  position:absolute;
+.overlay{
+  position:fixed;
   inset:0;
-  background:url("https://i.imgur.com/8KQZ6ZK.png");
-  opacity:0.2;
-  animation: float 20s linear infinite;
-}
-
-@keyframes float{
-  from{background-position:0 0;}
-  to{background-position:0 -2000px;}
+  background:rgba(255,182,193,0.55);
 }
 
 .card{
@@ -41,34 +34,32 @@ body{
   width:92%;
   max-width:420px;
   background:rgba(255,255,255,0.95);
-  border-radius:25px;
+  border-radius:24px;
   padding:22px;
   text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,0.25);
-  animation: fadeScale 1s ease;
+  animation:fadeScale 1.5s ease;
 }
 
 @keyframes fadeScale{
-  from{opacity:0;transform:scale(0.8);}
+  from{opacity:0;transform:scale(0.85);}
   to{opacity:1;transform:scale(1);}
-}
-
-h2{
-  color:#c9184a;
-  margin-bottom:10px;
 }
 
 p{
   font-size:16px;
   color:#333;
-  line-height:1.6;
+  line-height:1.7;
+}
+
+h2{
+  color:#b30059;
 }
 
 img{
   width:100%;
-  margin-top:15px;
+  margin-top:16px;
   border-radius:18px;
-  animation: slideUp 1s ease;
+  animation:slideUp 1.5s ease;
 }
 
 @keyframes slideUp{
@@ -76,97 +67,87 @@ img{
   to{opacity:1;transform:translateY(0);}
 }
 
-button{
-  margin-top:18px;
-  padding:10px 30px;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(45deg,#ff4d6d,#ff758f);
-  color:#fff;
-  font-size:16px;
-  cursor:pointer;
-  animation: heartbeat 1.5s infinite;
+.heart{
+  position:fixed;
+  bottom:-10px;
+  font-size:22px;
+  animation:float 6s linear infinite;
+  opacity:0.8;
 }
 
-@keyframes heartbeat{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.08);}
-  100%{transform:scale(1);}
+@keyframes float{
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(-100vh);opacity:0;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="hearts"></div>
+<div class="overlay"></div>
+
+<!-- 🎵 Background Music -->
+<audio id="music" autoplay>
+  <source src="Tu_hain_to_Female_version_status_lovesongstatus_Koi_nhi_mera_zarurat_teri_status_femaleversion_48KBPS.mp4" type="audio/mp4">
+</audio>
 
 <div class="card" id="box">
-  <h2>Hey My Love ❤️</h2>
-  <p>Tap slowly… every page holds my heart 💕</p>
-  <button onclick="next()">Tap 💖</button>
+  <p>Listen carefully… my heart is speaking for you 💕</p>
 </div>
 
 <script>
-let step = 0;
+const slides = [
 
-function next(){
-  const box = document.getElementById("box");
-  step++;
+`<p>With you, life feels softer,<br>warmer & beautiful 💖</p>
+<img src="2b0d88bd902278d6b32358aa5b376675.jpg">`,
 
-  const content = [
-    `
-    <p>
-      The moment I saw you,<br>
-      my heart whispered — *this is home* 🥹❤️
-    </p>
-    <img src="love1.jpg">
-    <button onclick="next()">Next 💞</button>
-    `,
-    `
-    <p>
-      Your smile is my favorite place,<br>
-      I want to live there forever 😊💕
-    </p>
-    <img src="love2.jpg">
-    <button onclick="next()">More 😘</button>
-    `,
-    `
-    <p>
-      With you, even silence<br>
-      feels like a beautiful song 🎶❤️
-    </p>
-    <img src="love3.jpg">
-    <button onclick="next()">Again 💓</button>
-    `,
-    `
-    <p>
-      Every heartbeat of mine<br>
-      spells only one name — YOU ♾️
-    </p>
-    <img src="love4.jpg">
-    <button onclick="next()">One More 💗</button>
-    `,
-    `
-    <p>
-      No distance, no time,<br>
-      nothing can ever change us 💍
-    </p>
-    <img src="love5.jpg">
-    <button onclick="next()">Final ❤️</button>
-    `,
-    `
-    <h2>Forever & Always ❤️</h2>
-    <p>
-      If love had a face,<br>
-      it would look exactly like YOU 🥰
-    </p>
-    <img src="love6.jpg">
-    <p><b>— Yours Forever 💖</b></p>
-    `
-  ];
+`<p>You promise me…<br>
+<b>When I’m angry, you’ll always kiss me 😘</b></p>
+<img src="265b1dab3a86b5abe74118388ef81344.jpg">`,
 
-  box.innerHTML = content[step-1];
-}
+`<p><b>I love you, mine ❤️</b><br>
+Forever isn’t long enough ♾️</p>
+<img src="0364a08a488a424953c2a8114c61811d.jpg">`,
+
+`<p>My favorite place in the world<br>is next to you 🤍</p>
+<img src="2740a6b74d594baebaf48f69560390bd.jpg">`,
+
+`<p>No matter what life brings,<br>I’ll always choose you 💓</p>
+<img src="621253e0bf313391209a06807bebfe59.jpg">`,
+
+`<p>You are not my option,<br>you are my destiny 💍</p>
+<img src="1112eab810ced1f811cc738889dcaf9b.jpg">`,
+
+`<h2>Happy New Year ❤️</h2>
+<p>New year… same love…<br>Forever with you 🎆</p>
+<img src="e765a444238fe225cb123b7b7abbe0c7.jpg">
+<p><b>— Yours Forever 🥰</b></p>`
+];
+
+let index = 0;
+const box = document.getElementById("box");
+
+setInterval(()=>{
+  if(index < slides.length){
+    box.innerHTML = slides[index];
+    index++;
+  }
+}, 8500); // ~1 minute total
+
+// floating hearts
+setInterval(()=>{
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random()*100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+},700);
+
+// mobile autoplay fix
+document.body.addEventListener("click",()=>{
+  document.getElementById("music").play();
+});
 </script>
 
 </body>
