@@ -21,16 +21,29 @@ overflow:hidden;
 color:#fff;
 }
 
-.floating span{
-position:absolute;
-animation:float 10s linear infinite;
-opacity:.6;
-}
-@keyframes float{
-0%{transform:translateY(100vh) scale(.8)}
-100%{transform:translateY(-10vh) scale(1.2)}
+/* FLOATING EMOJI STYLE */
+.float{
+position:fixed;
+bottom:-50px;
+animation-name:floatUp;
+animation-timing-function:linear;
+animation-iteration-count:1;
+opacity:.7;
+pointer-events:none;
 }
 
+@keyframes floatUp{
+from{
+transform:translateY(0) scale(.8);
+opacity:.8;
+}
+to{
+transform:translateY(-120vh) scale(1.2);
+opacity:0;
+}
+}
+
+/* CARD */
 .card{
 width:85%;
 max-width:420px;
@@ -83,10 +96,13 @@ animation:beat 1.2s infinite;
 
 audio{display:none}
 </style>
+</head>
+
+<body>
 
 <div class="card show" id="card">
 <h1>Happy New Year 🎆</h1>
-<p>Naya saal shuru ho raha hai…<br>aur meri sabse special feeling tum ho 💙</p>
+<p>Naya saal shuru ho raha hai…<br>aur meri sabse special feeling tu hai 💙</p>
 <div class="tap">Tap 💙</div>
 </div>
 
@@ -95,33 +111,34 @@ audio{display:none}
 </audio>
 
 <script>
+/* SLIDES */
 const slides = [
 {
-title:"Happy New Year 💕",
-text:"Naya saal shuru ho raha hai…<br>aur meri sabse special feeling tum ho 💙"
+title:"Happy New Year 🎆",
+text:"Naya saal shuru ho raha hai…<br>aur meri sabse special feeling tu hai 💙"
 },
 {
 title:"Sach 💌",
-text:"Tumhara saath hota hai na…<br>toh sab kuch thoda aur strong lagta hai 🥺"
+text:"Tu saath hota hai na…<br>toh sab kuch thoda aur strong lagta hai 🥺"
 },
 {
 title:"Wada 🤞",
-text:"Chahe situation koi bhi ho…<br>main hamesha apka hamesha saath nibhaungi 💙"
+text:"Chahe situation koi bhi ho…<br>main hamesha tera saath nibhaungi 💙"
 },
 {
 title:"Dil ki baat ❤️",
-text:"Tum ho toh sab kuch complete lagta hai…<br><strong>Koi nahi mera, zarurat bs apki.</strong>"
+text:"Tu hai toh sab kuch complete lagta hai…<br><strong>Koi nahi mera, zarurat teri.</strong>"
 },
 {
 title:"Forever 💫",
-text:"I choose you.<br>Every year 💕 Always."
+text:"I choose you.<br>Every year. Always."
 },
 {
 title:"Happy New Year ❤️",
-text:"Happy New Year my love 😘"
+text:"Happy New Year my love 💙"
 },
 {
-title:"your diku 💗",
+title:"your diku 😘",
 text:"I love you my cutie 💙"
 }
 ];
@@ -158,19 +175,19 @@ ${control}
 card.classList.add("show");
 },500);
 }
-  /* FLOATING EMOJIS (NO LINE ISSUE, NO WHITE) */
+
+/* 🔥 IMAGE-LIKE FLOATING EMOJIS (FINAL) */
 setInterval(()=>{
 let f=document.createElement("div");
 f.className="float";
-f.innerHTML=["💙","✨","💫","🌌"][Math.floor(Math.random()*4)];
+f.innerHTML=["💙","✨","💫","🌌","🤍"][Math.floor(Math.random()*5)];
 f.style.left=Math.random()*100+"vw";
-f.style.fontSize=14+Math.random()*20+"px";
-f.style.animationDuration=6+Math.random()*6+"s";
+f.style.fontSize=16+Math.random()*24+"px";
+f.style.animationDuration=8+Math.random()*10+"s";
 document.body.appendChild(f);
-setTimeout(()=>f.remove(),12000);
-},600);
+setTimeout(()=>f.remove(),18000);
+},550);
 </script>
-  
 
 </body>
 </html>
