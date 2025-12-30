@@ -3,15 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love Story ❤️</title>
+<title>New Year Surprise ❤️</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
 
 body{
   min-height:100vh;
@@ -21,22 +16,14 @@ body{
   align-items:center;
   overflow:hidden;
 }
-
-/* dark overlay */
 body::before{
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.35);
+  background:rgba(0,0,0,.45);
 }
 
-/* main container */
-.app{
-  position:relative;
-  z-index:2;
-  width:92%;
-  max-width:420px;
-}
+.app{z-index:2;width:92%;max-width:420px}
 
 /* card */
 .card{
@@ -46,49 +33,46 @@ body::before{
   padding:22px;
   text-align:center;
   color:#fff;
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
-  animation:slideUp .7s ease;
+  animation:slide .6s ease;
 }
 
-/* transitions */
-.fade{
-  animation:fadeIn .7s ease;
+@keyframes slide{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-.slide{
-  animation:slideUp .7s ease;
+/* hold heart */
+.hold{
+  font-size:80px;
+  cursor:pointer;
+  animation:pulse 1.3s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+  100%{transform:scale(1)}
 }
 
-@keyframes fadeIn{
-  from{opacity:0;}
-  to{opacity:1;}
+.progress{
+  height:6px;
+  background:#fff3;
+  border-radius:10px;
+  margin-top:15px;
+  overflow:hidden;
+}
+.bar{
+  height:100%;
+  width:0;
+  background:#ff4d6d;
 }
 
-@keyframes slideUp{
-  from{opacity:0;transform:translateY(30px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-/* image gallery */
+/* images */
 img{
   width:100%;
   border-radius:18px;
   margin-top:15px;
-  animation:fadeIn .8s ease;
 }
 
-/* text */
-p{
-  font-size:16px;
-  line-height:1.6;
-}
-
-h2{
-  color:#ffe6f0;
-  margin-bottom:10px;
-}
-
-/* button */
 button{
   margin-top:18px;
   padding:10px 30px;
@@ -100,18 +84,20 @@ button{
   cursor:pointer;
 }
 
-/* floating hearts */
+.choice{
+  display:flex;
+  justify-content:space-around;
+}
+
+/* hearts */
 .heart{
   position:absolute;
   color:#ff6b81;
-  font-size:16px;
   animation:float 6s linear infinite;
 }
-
 @keyframes float{
-  0%{transform:translateY(0);opacity:0;}
-  20%{opacity:1;}
-  100%{transform:translateY(-100vh);opacity:0;}
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-100vh);opacity:0}
 }
 </style>
 </head>
@@ -124,83 +110,97 @@ button{
 
 <div class="app">
   <div class="card" id="card">
-    <h2>Hey My Love ❤️</h2>
-    <p>Tap slowly… every screen is made for you 💕</p>
-    <button onclick="next()">Start 💖</button>
+    <h2>Diku ❤️</h2>
+    <p>Hold the heart…<br>something special is waiting 🥺</p>
+    <div class="hold" id="hold">❤️</div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
   </div>
 </div>
 
 <script>
-let step=0;
-let started=false;
+let timer,fill=0,step=0,started=false;
+const bar=document.getElementById("bar");
+const card=document.getElementById("card");
+const music=document.getElementById("music");
+
+const hold=document.getElementById("hold");
+hold.addEventListener("touchstart",start);
+hold.addEventListener("mousedown",start);
+hold.addEventListener("touchend",reset);
+hold.addEventListener("mouseup",reset);
+
+function start(){
+  timer=setInterval(()=>{
+    fill+=2;
+    bar.style.width=fill+"%";
+    if(fill>=100){
+      clearInterval(timer);
+      music.play();
+      next();
+    }
+  },40);
+}
+function reset(){clearInterval(timer);}
 
 function next(){
-  if(!started){
-    document.getElementById("music").play();
-    started=true;
-  }
-
-  const card=document.getElementById("card");
-  card.className="card fade";
+  card.innerHTML="";
   step++;
 
   if(step===1){
     card.innerHTML=`
-      <p>You promise me…<br>
-      <b>When I’m angry, you’ll always kiss me 😘</b></p>
+      <p>When I get angry…<br>
+      <b>promise you’ll kiss me first 😘</b></p>
       <img src="265b1dab3a86b5abe74118388ef81344.jpg">
-      <button onclick="next()">Next 💞</button>
-    `;
+      <button onclick="next()">Next 💞</button>`;
   }
   else if(step===2){
     card.innerHTML=`
-      <p><b>I love you, mine ❤️</b><br>
-      You are my safe place.</p>
+      <p><b>I love you ❤️</b><br>
+      You are my comfort, my home.</p>
       <img src="0364a08a488a424953c2a8114c61811d.jpg">
-      <button onclick="next()">Next 💗</button>
-    `;
+      <button onclick="next()">Next 💗</button>`;
   }
   else if(step===3){
     card.innerHTML=`
-      <p>Every moment with you feels like magic ✨</p>
+      <p>Every moment with you feels unreal ✨</p>
       <img src="2b0d88bd902278d6b32358aa5b376675.jpg">
-      <button onclick="next()">Next 💕</button>
-    `;
+      <button onclick="next()">Next 💕</button>`;
   }
   else if(step===4){
     card.innerHTML=`
-      <p>Your hand in mine is my forever 🤍</p>
+      <p>Your hand in mine… forever 🤍</p>
       <img src="2740a6b74d594baebaf48f69560390bd.jpg">
-      <button onclick="next()">Next ❤️</button>
-    `;
+      <button onclick="next()">Next ❤️</button>`;
   }
   else if(step===5){
     card.innerHTML=`
-      <p>You & me — always, endlessly ♾️</p>
+      <h2>Will you be mine… forever? 💍</h2>
       <img src="621253e0bf313391209a06807bebfe59.jpg">
-      <button onclick="next()">Final 💖</button>
-    `;
-  }
-  else{
-    card.innerHTML=`
-      <h2>Happy New Year My Love 😘❤️</h2>
-      <p>My only wish… a lifetime with YOU 💍</p>
-      <img src="e765a444238fe225cb123b7b7abbe0c7.jpg">
-      <p><b>— Forever Yours 😘</b></p>
-    `;
+      <div class="choice">
+        <button onclick="yes()">YES ❤️</button>
+        <button onclick="yes()">ALWAYS YES 😘</button>
+      </div>`;
   }
 }
 
-/* hearts */
-setInterval(()=>{
+function yes(){
+  card.innerHTML=`
+    <h2>Happy New Year My Love 🎆❤️</h2>
+    <p>This life… next life… every life<br><b>I choose YOU.</b></p>
+    <img src="e765a444238fe225cb123b7b7abbe0c7.jpg">
+    <p>Forever Yours 😘</p>`;
+  setInterval(createHeart,300);
+}
+
+function createHeart(){
   const h=document.createElement("div");
   h.className="heart";
   h.innerHTML="❤️";
   h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(12+Math.random()*18)+"px";
+  h.style.fontSize=(14+Math.random()*20)+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
-},600);
+}
 </script>
 
 </body>
