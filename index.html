@@ -2,34 +2,37 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>💖 New Year Surprise 💖</title>
+<title>💖 New Year Love Surprise 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
 body{
 height:100vh;
 overflow:hidden;
-background:linear-gradient(120deg,#ff5fa2,#6a0dad,#1b0033);
-animation:bgMove 10s infinite alternate;
+background:linear-gradient(135deg,#ff5fa2,#7b2ff7,#1b0033);
+background-size:400% 400%;
+animation:bgMove 12s infinite alternate;
 color:white;
 }
+
 @keyframes bgMove{
-0%{background-position:left}
-100%{background-position:right}
+0%{background-position:0% 50%}
+100%{background-position:100% 50%}
 }
 
-/* FLOATING HEARTS */
+/* FLOATING EMOJIS */
 .float{
 position:fixed;
-bottom:-20px;
 font-size:20px;
-animation:floatUp linear infinite;
-opacity:.8;
+animation:floatUp linear forwards;
+pointer-events:none;
 }
 @keyframes floatUp{
+from{transform:translateY(0);opacity:1}
 to{transform:translateY(-120vh);opacity:0}
 }
 
@@ -38,13 +41,13 @@ to{transform:translateY(-120vh);opacity:0}
 position:absolute;
 top:50%;
 left:50%;
-transform:translate(-50%,-50%) scale(.8);
+transform:translate(-50%,-50%) scale(.85);
 width:90%;
 max-width:420px;
-text-align:center;
 opacity:0;
-transition:1s;
+transition:1s cubic-bezier(.68,-0.55,.27,1.55);
 }
+
 .slide.active{
 opacity:1;
 transform:translate(-50%,-50%) scale(1);
@@ -56,113 +59,179 @@ backdrop-filter:blur(18px);
 background:rgba(255,255,255,.15);
 border-radius:30px;
 padding:30px;
-box-shadow:0 0 50px rgba(255,0,150,.6);
+text-align:center;
+box-shadow:0 0 45px rgba(255,0,150,.6);
 }
+
 h1{
 font-family:'Pacifico',cursive;
 margin-bottom:10px;
 }
-button{
-margin-top:15px;
-padding:12px 25px;
+
+p{
+font-size:.95em;
+line-height:1.6;
+}
+
+/* TAP BUTTON */
+.tapBtn{
+margin-top:22px;
+padding:14px 32px;
+font-size:1.1em;
 border:none;
-border-radius:25px;
+border-radius:30px;
 background:linear-gradient(45deg,#ff4da6,#ff85c2);
 color:white;
-font-size:1em;
 cursor:pointer;
+animation:tapPulse 1.5s infinite;
+box-shadow:0 0 25px rgba(255,0,150,.7);
+}
+
+@keyframes tapPulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.15)}
+100%{transform:scale(1)}
+}
+
+/* INTRO */
+#intro{
+position:fixed;
+inset:0;
+background:linear-gradient(135deg,#ff5fa2,#6a0dad);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+#intro.hide{
+animation:fadeOut 1s forwards;
+}
+
+@keyframes fadeOut{
+to{opacity:0;pointer-events:none}
+}
+
+.intro-heart{
+font-size:90px;
+animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+50%{transform:scale(1.3)}
 }
 </style>
 </head>
 
 <body>
 
+<!-- INTRO -->
+<div id="intro" onclick="startStory()">
+  <div class="intro-heart">💖</div>
+  <p>Tap to begin our story ✨</p>
+</div>
+
 <!-- MUSIC -->
 <audio id="music" loop>
-<source src="Tu_hain_to_Female_version_status_lovesongstatus_Koi_nhi_mera_zarurat_teri_status_femaleversion_48KBPS.mp4" type="audio/mp4">
+  <source src="Tu_hain_to_Female_version_status_lovesongstatus_Koi_nhi_mera_zarurat_teri_status_femaleversion_48KBPS.mp4" type="audio/mp4">
 </audio>
 
 <!-- SLIDES -->
 <div class="slide active">
-<div class="card">
-<h1>Happy New Year my love 😘❤️🎆</h1>
-<p>Iss naye saal ki sabse khoobsurat shuruaat… 💖<br>
-<strong>Tu.</strong></p>
-</div>
-</div>
-
-<div class="slide">
-<div class="card">
-<h1>My Love 🥺</h1>
-<p>
-Tu hasta hai toh duniya bright lagti hai ✨<br>
-Tu roothte ho toh sab khali lagta hai 💔
-</p>
-</div>
+  <div class="card">
+    <h1>Happy New Year 🎆</h1>
+    <p>
+      Iss naye saal ki sabse khoobsurat shuruaat… 💖<br>
+      <strong>Tu.</strong>
+    </p>
+    <button class="tapBtn" onclick="nextSlide()">Tap 💖</button>
+  </div>
 </div>
 
 <div class="slide">
-<div class="card">
-<h1>Promises 🤞</h1>
-<p>
-💖 Har situation me saath<br>
-💖 Har sapne me support<br>
-💖 Har saal sirf TU
-</p>
-</div>
-</div>
-
-<div class="slide">
-<div class="card">
-<h1>Truth 💌</h1>
-<p>
-Tu hai toh mujhe aur kya chahiye… 🥹🎶<br>
-<strong>Koi nahi mera, zarurat teri.</strong>
-</p>
-</div>
+  <div class="card">
+    <h1>My Love 🥺</h1>
+    <p>
+      Tu hasta hai toh sab kuch sahi lagta hai ✨<br>
+      Tu saath ho toh har dar kam lagta hai 💞
+    </p>
+    <button class="tapBtn" onclick="nextSlide()">Next ✨</button>
+  </div>
 </div>
 
 <div class="slide">
-<div class="card">
-<h1>Forever? 💍</h1>
-<button onclick="celebrate()">YES 😘</button>
+  <div class="card">
+    <h1>Promises 🤞</h1>
+    <p>
+      💖 Har mood me tera saath<br>
+      💖 Har sapne me tera naam<br>
+      💖 Har saal sirf TU
+    </p>
+    <button class="tapBtn" onclick="nextSlide()">Continue 💫</button>
+  </div>
 </div>
+
+<div class="slide">
+  <div class="card">
+    <h1>Truth 💌</h1>
+    <p>
+      Tu hai toh mujhe aur kya chahiye… 🎶<br>
+      <strong>Koi nahi mera, zarurat teri.</strong>
+    </p>
+    <button class="tapBtn" onclick="nextSlide()">One Last 💖</button>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="card">
+    <h1>Forever? 💍</h1>
+    <p>I choose you. Every year. Forever.</p>
+    <button class="tapBtn" onclick="celebrate()">YES 😘</button>
+  </div>
 </div>
 
 <script>
-let slides=document.querySelectorAll(".slide");
-let i=0;
+let slides = document.querySelectorAll(".slide");
+let current = 0;
 
-/* MUSIC */
-document.body.addEventListener("click",()=>{
+/* START STORY */
+function startStory(){
+document.getElementById("intro").classList.add("hide");
 document.getElementById("music").play();
-},{once:true});
+}
 
-/* AUTO SLIDE */
-setInterval(()=>{
-slides[i].classList.remove("active");
-i=(i+1)%slides.length;
-slides[i].classList.add("active");
-},3500);
+/* NEXT SLIDE */
+function nextSlide(){
+slides[current].classList.remove("active");
+current++;
+if(current >= slides.length){
+current = slides.length - 1;
+}
+slides[current].classList.add("active");
+}
 
-/* FLOATING EMOJIS */
+/* FLOATING EMOJIS (NO LINE ISSUE) */
 setInterval(()=>{
 let f=document.createElement("div");
 f.className="float";
 f.innerHTML=["💖","✨","💞","🥰","🎆"][Math.floor(Math.random()*5)];
 f.style.left=Math.random()*100+"vw";
-f.style.animationDuration=5+Math.random()*5+"s";
+f.style.top=100+Math.random()*20+"vh";
+f.style.fontSize=18+Math.random()*18+"px";
+f.style.animationDuration=6+Math.random()*6+"s";
 document.body.appendChild(f);
-setTimeout(()=>f.remove(),10000);
-},400);
+setTimeout(()=>f.remove(),12000);
+},500);
 
-/* CELEBRATION */
+/* FINAL CELEBRATION */
 function celebrate(){
-for(let i=0;i<100;i++){
+for(let i=0;i<80;i++){
 let c=document.createElement("div");
 c.className="float";
 c.innerHTML="🎉";
 c.style.left=Math.random()*100+"vw";
+c.style.top="100vh";
 c.style.animationDuration="3s";
 document.body.appendChild(c);
 }
