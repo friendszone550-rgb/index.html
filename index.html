@@ -5,102 +5,105 @@
 <title>💙 New Year 💙</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
 height:100vh;
-overflow:hidden;
 background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-background-size:300% 300%;
-animation:bgMove 12s ease infinite;
-color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:'Poppins',sans-serif;
+overflow:hidden;
+color:#fff;
 }
 
-@keyframes bgMove{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-
-/* FLOATING EMOJIS */
-.float{
-position:fixed;
-font-size:18px;
-opacity:.75;
-animation:rise linear forwards;
-pointer-events:none;
-}
-@keyframes rise{
-from{transform:translateY(110vh) scale(1)}
-to{transform:translateY(-20vh) scale(1.4);opacity:0}
-}
-
-/* CARD */
-.card{
+.floating span{
 position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%) scale(.9);
+animation:float 10s linear infinite;
+opacity:.6;
+}
+@keyframes float{
+0%{transform:translateY(100vh) scale(.8)}
+100%{transform:translateY(-10vh) scale(1.2)}
+}
+
+.card{
 width:85%;
 max-width:420px;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(12px);
+border-radius:25px;
+padding:35px 25px;
 text-align:center;
-padding:32px;
-border-radius:30px;
-background:rgba(255,255,255,.12);
-backdrop-filter:blur(18px);
-box-shadow:0 0 60px rgba(0,180,255,.35);
+box-shadow:0 20px 40px rgba(0,0,0,.3);
+cursor:pointer;
 opacity:0;
-transition:1s ease;
+transform:scale(.9);
+transition:.6s;
 }
 
 .card.show{
 opacity:1;
-transform:translate(-50%,-50%) scale(1);
+transform:scale(1);
 }
 
-h1{
+.card h1{
 font-family:'Pacifico',cursive;
 font-size:2.2em;
 margin-bottom:12px;
 }
 
-p{
-font-size:1em;
-line-height:1.7;
+.card p{
+font-size:1.05em;
+line-height:1.6;
 }
 
-/* TAP TEXT */
 .tap{
-margin-top:22px;
-font-size:.9em;
-opacity:.8;
-animation:blink 1.5s infinite;
+margin-top:18px;
+opacity:.7;
 }
-@keyframes blink{
-50%{opacity:.4}
+
+.heartbeat{
+font-size:1.9em;
+margin-top:20px;
+animation:beat 1.2s infinite;
 }
+
+@keyframes beat{
+0%{transform:scale(1)}
+25%{transform:scale(1.25)}
+50%{transform:scale(1)}
+75%{transform:scale(1.25)}
+100%{transform:scale(1)}
+}
+
+audio{display:none}
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
-<audio id="music" loop>
-<source src="Tu_hain_to_Female_version_status_lovesongstatus_Koi_nhi_mera_zarurat_teri_status_femaleversion_48KBPS.mp4" type="audio/mp4">
-</audio>
-
-<!-- CARD -->
-<div id="card" class="card show">
-  <h1>Happy New Year 🎆</h1>
-  <p>
-    Naya saal shuru ho raha hai…<br>
-    aur meri sabse special feeling tum ho 💙
-  </p>
-  <div class="tap">Tap anywhere ✨</div>
+<div class="floating">
+<span style="left:10%">💙</span>
+<span style="left:30%">✨</span>
+<span style="left:50%">💫</span>
+<span style="left:70%">💙</span>
+<span style="left:85%">✨</span>
 </div>
+
+<div class="card show" id="card">
+<h1>Happy New Year 🎆</h1>
+<p>Naya saal shuru ho raha hai…<br>aur meri sabse special feeling tum ho 💙</p>
+<div class="tap">Tap 💙</div>
+</div>
+
+<audio id="bgm" loop>
+<source src="Tu_hain_to_Female_version_status_lovesongstatus_Koi_nhi_mera_zarurat_teri_status_femaleversion_48KBPS.mp4">
+</audio>
 
 <script>
 const slides = [
@@ -110,28 +113,35 @@ text:"Naya saal shuru ho raha hai…<br>aur meri sabse special feeling tum ho �
 },
 {
 title:"Sach 💌",
-text:"Tum saath hota hai na…<br>toh sab kuch thoda aur strong lagta hai 🥺"
+text:"Tumhara saath hota hai na…<br>toh sab kuch thoda aur strong lagta hai 🥺"
 },
 {
 title:"Wada 🤞",
-text:"Chahe situation koi bhi ho…<br>main hamesha tumhara saath nibhaungi 💙"
+text:"Chahe situation koi bhi ho…<br>main hamesha apka hamesha saath nibhaungi 💙"
 },
 {
 title:"Dil ki baat ❤️",
-text:"Tum hai toh sab kuch complete lagta hai…<br><strong>Koi nahi mera, zarurat teri.</strong>"
+text:"Tum ho toh sab kuch complete lagta hai…<br><strong>Koi nahi mera, zarurat bs apki.</strong>"
 },
 {
 title:"Forever 💫",
-text:"I choose you.<br>Every year. Always."
+text:"I choose you.<br>Every year 💕 Always."
+},
+{
+title:"Happy New Year ❤️",
+text:"Happy New Year my love 💙"
+},
+{
+title:"",
+text:"I love you my cutie 💙"
 }
 ];
 
 let index = 0;
 const card = document.getElementById("card");
-const music = document.getElementById("music");
+const music = document.getElementById("bgm");
 
-/* TAP TO CONTINUE */
-document.body.addEventListener("click",()=>{
+card.addEventListener("click",()=>{
 if(music.paused) music.play();
 nextSlide();
 });
@@ -141,27 +151,24 @@ index++;
 if(index >= slides.length) return;
 
 card.classList.remove("show");
+
 setTimeout(()=>{
+let control = `<div class="tap">Tap 💙</div>`;
+if(index === slides.length-2){
+control = `<div class="heartbeat">💙</div>`;
+}
+if(index === slides.length-1){
+control = "";
+}
+
 card.innerHTML = `
 <h1>${slides[index].title}</h1>
 <p>${slides[index].text}</p>
-<div class="tap">Tap 💙</div>
+${control}
 `;
 card.classList.add("show");
-},600);
-}
-
-/* FLOATING EMOJIS (NO LINE ISSUE) */
-setInterval(()=>{
-let f=document.createElement("div");
-f.className="float";
-f.innerHTML=["💙","✨","🤍","🌌"][Math.floor(Math.random()*4)];
-f.style.left=Math.random()*100+"vw";
-f.style.fontSize=14+Math.random()*20+"px";
-f.style.animationDuration=6+Math.random()*6+"s";
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),12000);
 },500);
+}
 </script>
 
 </body>
