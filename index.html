@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Love ❤️</title>
+<title>Something For You ❤️</title>
 
 <style>
 *{
@@ -29,16 +29,16 @@ body::before{
   background:rgba(0,0,0,.45);
 }
 
-/* ⭐ Stars */
+/* stars */
 .star{
   position:absolute;
   width:2px;
   height:2px;
-  background:white;
+  background:#fff;
   opacity:.8;
-  animation:starMove linear infinite;
+  animation:move linear infinite;
 }
-@keyframes starMove{
+@keyframes move{
   from{transform:translateY(0)}
   to{transform:translateY(-100vh)}
 }
@@ -49,34 +49,22 @@ body::before{
   max-width:420px;
 }
 
-/* 💎 Glass Card */
 .card{
   background:rgba(255,255,255,.18);
   backdrop-filter:blur(18px);
-  border-radius:26px;
-  padding:24px;
+  border-radius:24px;
+  padding:22px;
   text-align:center;
   color:#fff;
-  border:1px solid rgba(255,255,255,.25);
   box-shadow:
-    0 0 30px rgba(255,77,109,.45),
-    inset 0 0 20px rgba(255,255,255,.1);
-  animation:slideUp .6s ease;
-  transition:.4s;
+    0 0 25px rgba(255,77,109,.4),
+    inset 0 0 25px rgba(255,255,255,.08);
+  animation:slide .6s ease;
 }
 
-@keyframes slideUp{
+@keyframes slide{
   from{opacity:0;transform:translateY(30px)}
   to{opacity:1;transform:translateY(0)}
-}
-
-.card.shake{
-  animation:shake .4s;
-}
-@keyframes shake{
-  0%,100%{transform:translateX(0)}
-  25%{transform:translateX(-6px)}
-  50%{transform:translateX(6px)}
 }
 
 h2{margin-bottom:10px;color:#ffe6f0}
@@ -88,82 +76,57 @@ img{
   margin-top:15px;
 }
 
-/* 💓 Heart Hold */
-.hold-wrap{
-  position:relative;
-  display:inline-block;
-  margin:10px 0;
-}
-.heart{
-  font-size:70px;
-  animation:pulse 1.5s infinite;
-}
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.25)}
-}
-.progress-ring{
-  position:absolute;
-  inset:-15px;
-  border-radius:50%;
-  border:3px solid rgba(255,77,109,.3);
-}
-.progress-ring::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:50%;
-  border:3px solid #ff4d6d;
-  animation:progress 1.5s linear forwards;
-}
-@keyframes progress{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
-}
-
-/* 🎴 Mini Cards */
-.cards{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  margin-top:10px;
-}
-.mini{
-  padding:18px;
-  border-radius:16px;
-  background:rgba(255,255,255,.25);
-  backdrop-filter:blur(10px);
-  cursor:pointer;
-  transition:.4s;
-}
-.mini:active{
-  transform:scale(.9) rotate(-6deg);
-}
-
-/* 🎉 Confetti */
-.confetti{
-  position:absolute;
-  width:8px;
-  height:12px;
-  animation:fall 3.5s linear forwards;
-}
-@keyframes fall{
-  to{
-    transform:translateY(100vh) rotate(360deg);
-    opacity:0;
-  }
-}
-
-/* 🔘 Button */
 button{
   margin-top:18px;
-  padding:10px 30px;
+  padding:10px 28px;
   border:none;
   border-radius:30px;
   background:#ff4d6d;
   color:#fff;
   font-size:15px;
   cursor:pointer;
+}
+
+/* heart hold */
+.heart{
+  font-size:60px;
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+}
+
+/* cards */
+.cards{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+.mini{
+  padding:18px;
+  border-radius:16px;
+  background:rgba(255,255,255,.25);
+  cursor:pointer;
+  animation:float 3s infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+/* confetti */
+.confetti{
+  position:absolute;
+  width:8px;
+  height:12px;
+  animation:fall 4s linear forwards;
+}
+@keyframes fall{
+  to{
+    transform:translateY(100vh) rotate(360deg);
+    opacity:0;
+  }
 }
 </style>
 </head>
@@ -176,18 +139,15 @@ button{
 
 <div class="app">
   <div class="card" id="card">
-    <p>Hold the heart 💖</p>
-    <div class="hold-wrap">
-      <div class="progress-ring"></div>
-      <div class="heart">❤️</div>
-    </div>
-    <p>Something special is waiting…</p>
+    <p>Hold the heart 💓</p>
+    <div class="heart">❤️</div>
+    <p>Something is waiting for you</p>
   </div>
 </div>
 
 <script>
-/* ⭐ Stars */
-for(let i=0;i<45;i++){
+/* stars */
+for(let i=0;i<40;i++){
   let s=document.createElement("div");
   s.className="star";
   s.style.left=Math.random()*100+"vw";
@@ -196,15 +156,17 @@ for(let i=0;i<45;i++){
   document.body.appendChild(s);
 }
 
+let step=0;
+let started=false;
+let timer;
+
 const card=document.getElementById("card");
 const music=document.getElementById("music");
-let step=0, started=false, timer;
 
-/* ❤️ Hold detection */
-card.addEventListener("mousedown",hold);
 card.addEventListener("touchstart",hold);
-card.addEventListener("mouseup",release);
+card.addEventListener("mousedown",hold);
 card.addEventListener("touchend",release);
+card.addEventListener("mouseup",release);
 
 function hold(){
   timer=setTimeout(next,1500);
@@ -213,18 +175,15 @@ function release(){
   clearTimeout(timer);
 }
 
-/* 🎉 Confetti blast */
 function confettiBlast(){
-  card.classList.add("shake");
-  setTimeout(()=>card.classList.remove("shake"),400);
-
-  for(let i=0;i<140;i++){
+  for(let i=0;i<80;i++){
     let c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*100+"vw";
     c.style.background=`hsl(${Math.random()*360},100%,60%)`;
+    c.style.animationDuration=(3+Math.random()*2)+"s";
     document.body.appendChild(c);
-    setTimeout(()=>c.remove(),4000);
+    setTimeout(()=>c.remove(),5000);
   }
 }
 
@@ -237,46 +196,52 @@ function next(){
 
   if(step===1){
     card.innerHTML=`
-      <p>Move all stress away 😌</p>
-      <div class="cards">
-        <div class="mini" onclick="next()">Stress</div>
-        <div class="mini" onclick="next()">Tension</div>
-        <div class="mini" onclick="next()">Fear</div>
-      </div>`;
+    <p>Move your stress aside 😌</p>
+    <div class="cards">
+      <div class="mini" onclick="next()">Stress</div>
+      <div class="mini" onclick="next()">Tension</div>
+      <div class="mini" onclick="next()">Fear</div>
+    </div>`;
   }
   else if(step===2){
     card.innerHTML=`
-      <p>Open your surprise 🎁</p>
-      <button onclick="next()">Open</button>`;
+    <p>Open the gift 🎁</p>
+    <button onclick="next()">Open</button>`;
     confettiBlast();
   }
   else if(step===3){
     card.innerHTML=`
-      <h2>Golden Ticket ✨</h2>
-      <p>Unlimited hugs & love 💕</p>
-      <button onclick="next()">Claim</button>`;
+    <h2>Golden Ticket ✨</h2>
+    <p>Valid for unlimited love</p>
+    <button onclick="next()">Claim</button>`;
   }
   else if(step===4){
     card.innerHTML=`
-      <p>Our memories 💞</p>
-      <img src="265b1dab3a86b5abe74118388ef81344.jpg">
-      <button onclick="next()">Next</button>`;
+    <p>Our moments 💕</p>
+    <img src="265b1dab3a86b5abe74118388ef81344.jpg">
+    <button onclick="next()">Next</button>`;
   }
   else if(step===5){
     card.innerHTML=`
-      <img src="0364a08a488a424953c2a8114c61811d.jpg">
-      <button onclick="next()">Next</button>`;
+    <img src="0364a08a488a424953c2a8114c61811d.jpg">
+    <button onclick="next()">Next</button>`;
+  }
+  else if(step===6){
+    card.innerHTML=`
+    <img src="2b0d88bd902278d6b32358aa5b376675.jpg">
+    <button onclick="next()">Next</button>`;
   }
   else{
     card.innerHTML=`
-      <h2>Happy New Year My Love 😘❤️</h2>
-      <p>
-      I wish you peace, smiles & endless love.<br><br>
-      No matter what…<br>
-      I am always yours 💍
-      </p>
-      <img src="e765a444238fe225cb123b7b7abbe0c7.jpg">
-      `;
+    <h2>Happy New Year My Love 😘❤️</h2>
+    <p>
+    I hope this year brings you calm mornings,<br>
+    peaceful nights & endless smiles.<br><br>
+    No matter what comes,<br>
+    I am always yours 💍
+    </p>
+    <img src="e765a444238fe225cb123b7b7abbe0c7.jpg">
+    `;
     confettiBlast();
   }
 }
