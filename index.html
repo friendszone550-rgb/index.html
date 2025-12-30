@@ -1,100 +1,218 @@
-  20%{opacity:1;}
-  100%{transform:translateY(-100vh);opacity:0;}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🔥 LOVE BLAST 🔥</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  height:100vh;
+  background:radial-gradient(circle at top,#ff0080,#12001f);
+  overflow:hidden;
+  font-family:'Poppins',sans-serif;
+}
+
+/* ===== BACKGROUND BLAST ===== */
+.lights{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 20% 30%,#ff4d6d55,transparent 40%),
+    radial-gradient(circle at 80% 60%,#ffd16655,transparent 45%),
+    radial-gradient(circle at 50% 90%,#7bf1a855,transparent 45%);
+  animation:move 6s linear infinite alternate;
+}
+@keyframes move{
+  from{filter:hue-rotate(0deg)}
+  to{filter:hue-rotate(360deg)}
+}
+
+/* ===== HEART RAIN ===== */
+.heart{
+  position:absolute;
+  font-size:22px;
+  animation:fall 6s linear infinite;
+}
+@keyframes fall{
+  from{transform:translateY(-10vh) scale(1);opacity:1}
+  to{transform:translateY(110vh) scale(1.6);opacity:0}
+}
+
+/* ===== MAIN CARD ===== */
+.card{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:92%;max-width:380px;
+  padding:25px;
+  text-align:center;
+  color:#fff;
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(20px);
+  border-radius:28px;
+  box-shadow:0 0 60px #ff0080;
+  animation:pop 1s ease;
+}
+@keyframes pop{
+  from{transform:translate(-50%,-50%) scale(0)}
+  to{transform:translate(-50%,-50%) scale(1)}
+}
+
+h1{
+  font-family:'Pacifico';
+  font-size:30px;
+  text-shadow:0 0 20px #ff5da2;
+}
+p{font-size:14px;margin:8px 0}
+
+/* ===== SLIDESHOW ===== */
+.slide{
+  width:100%;height:230px;
+  border-radius:22px;
+  overflow:hidden;
+  margin:15px 0;
+  box-shadow:0 0 25px #000;
+}
+.slide img{
+  width:100%;height:100%;
+  object-fit:cover;
+  animation:zoom 2.5s ease;
+}
+@keyframes zoom{
+  from{transform:scale(1.2);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+/* ===== BUTTONS ===== */
+.btns{display:flex;justify-content:center;gap:15px}
+button{
+  padding:12px 22px;
+  border:none;border-radius:30px;
+  font-size:15px;
+  cursor:pointer;
+}
+#yes{
+  background:#ff005d;
+  color:#fff;
+  box-shadow:0 0 25px #ff005d;
+  animation:pulse 1.2s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+  100%{transform:scale(1)}
+}
+#no{
+  background:#fff;color:#ff005d;
+}
+
+/* ===== FINAL BLAST ===== */
+.final{
+  display:none;
+  position:absolute;inset:0;
+  background:radial-gradient(circle,#ff005d,#000);
+  color:#fff;
+  text-align:center;
+}
+.final h2{
+  margin-top:40%;
+  font-family:'Pacifico';
+  font-size:34px;
+  text-shadow:0 0 40px #fff;
+  animation:glow 1s infinite alternate;
+}
+@keyframes glow{
+  from{text-shadow:0 0 20px #fff}
+  to{text-shadow:0 0 60px #ffb3d9}
+}
+
+/* ===== CONFETTI ===== */
+.confetti{
+  position:absolute;
+  width:8px;height:8px;
+  animation:conf 3s linear infinite;
+}
+@keyframes conf{
+  from{transform:translateY(-10vh) rotate(0)}
+  to{transform:translateY(110vh) rotate(360deg)}
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music">
-  <source src="Tu_hain_to_Female_version_status_lovesongstatus_Koi_nhi_mera_zarurat_teri_status_femaleversion_48KBPS.mp4">
-</audio>
+<div class="lights"></div>
 
-<div class="app">
-  <div class="card" id="card">
-    <h2>Hey it's me your Diku ❤️</h2>
-    <p>Tap slowly…<br>every moment here is only for YOU 💫</p>
-    <button onclick="next()">Start 💖</button>
+<div class="card">
+  <h1>My Love ❤️</h1>
+  <p>From memories… to forever 💖</p>
+
+  <div class="slide">
+    <img id="img" src="265b1dab3a86b5abe74118388ef81344.jpg">
+  </div>
+
+  <p>Will you be mine forever? 💍</p>
+
+  <div class="btns">
+    <button id="yes" onclick="YES()">YES 😍</button>
+    <button id="no">NO 🙈</button>
   </div>
 </div>
 
+<div class="final" id="final">
+  <h2>🎆 HAPPY NEW YEAR MY LOVE 🎆<br>FOREVER & ALWAYS ❤️</h2>
+</div>
+
 <script>
-let step
-let started=false;
-
-function next(){
-  if(!started){
-    document.getElementById("music").play();
-    started=true;
-  }
-
-  const card=document.getElementById("card");
-  card.className="card fade";
-  step++;
-
-  if(step===1){
-    card.innerHTML=`
-      <p>Promise me one thing… 🥺<br>
-      <b>When I’m angry,<br>you’ll pull me close & kiss me 😘</b></p>
-      <img src="265b1dab3a86b5abe74118388ef81344.jpg">
-      <button onclick="next()">Next 💞</button>
-    `;
-  }
-  else if(step===2){
-    card.innerHTML=`
-      <p><b>I love you, my safe place ❤️</b><br>
-      Everything feels right with you.</p>
-      <img src="0364a08a488a424953c2a8114c61811d.jpg">
-      <button onclick="next()">Next 💗</button>
-    `;
-  }
-  else if(step===3){
-    card.innerHTML=`
-      <p>With you…<br>
-      even ordinary moments feel magical ✨</p>
-      <img src="2b0d88bd902278d6b32358aa5b376675.jpg">
-      <button onclick="next()">Next 💕</button>
-    `;
-  }
-  else if(step===4){
-    card.innerHTML=`
-      <p>Your hand in mine…<br>
-      that’s where I belong 🤍</p>
-      <img src="2740a6b74d594baebaf48f69560390bd.jpg">
-      <button onclick="next()">Next ❤️</button>
-    `;
-  }
-  else if(step===5){
-    card.innerHTML=`
-      <p>You & Me — no matter what ♾️<br>
-      Always. Forever.</p>
-      <img src="621253e0bf313391209a06807bebfe59.jpg">
-      <button onclick="next()">Final 💖</button>
-    `;
-  }
-  else{
-    card.innerHTML=`
-      <h2>Happy New Year My Love ❤️</h2>
-      <p>This year… next year… every year 💍<br>
-      <b>I choose YOU.</b></p>
-      <img src="e765a444238fe225cb123b7b7abbe0c7.jpg">
-      <p><b>Forever yours 😘</b></p>
-    `;
-  }
-}
-
-/* hearts */
+// HEART RAIN
 setInterval(()=>{
   const h=document.createElement("div");
   h.className="heart";
-  h.innerHTML="❤️";
+  h.innerHTML="💖";
   h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(12+Math.random()*18)+"px";
+  h.style.fontSize=(16+Math.random()*24)+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
-},600);
+},250);
+
+// SLIDESHOW (TAMARA NAAM)
+const photos=[
+ "265b1dab3a86b5abe74118388ef81344.jpg",
+ "0364a08a488a424953c2a8114c61811d.jpg",
+ "2b0d88bd902278d6b32358aa5b376675.jpg",
+ "2740a6b74d594baebaf48f69560390bd.jpg",
+ "621253e0bf313391209a06807bebfe59.jpg"
+];
+let i=0;
+setInterval(()=>{
+  i=(i+1)%photos.length;
+  document.getElementById("img").src=photos[i];
+},2200);
+
+// NO BUTTON BHAGODA 😈
+const no=document.getElementById("no");
+no.addEventListener("mouseover",()=>{
+  no.style.position="absolute";
+  no.style.left=Math.random()*80+"%";
+  no.style.top=Math.random()*80+"%";
+});
+
+// YES = FULL BLAST
+function YES(){
+  document.getElementById("final").style.display="block";
+  for(let i=0;i<120;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
+}
 </script>
 
 </body>
 </html>
-
