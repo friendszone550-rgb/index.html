@@ -9,39 +9,27 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
   height:100vh;
-  background:radial-gradient(circle at top,#ff0080,#12001f);
+  background:
+    linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.6)),
+    url("file_00000000b01871faaa1784fc78c3bbc1.png") center/cover no-repeat;
   overflow:hidden;
   font-family:'Poppins',sans-serif;
 }
 
-/* ===== BACKGROUND BLAST ===== */
-.lights{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 20% 30%,#ff4d6d55,transparent 40%),
-    radial-gradient(circle at 80% 60%,#ffd16655,transparent 45%),
-    radial-gradient(circle at 50% 90%,#7bf1a855,transparent 45%);
-  animation:move 6s linear infinite alternate;
-}
-@keyframes move{
-  from{filter:hue-rotate(0deg)}
-  to{filter:hue-rotate(360deg)}
-}
-
-/* ===== HEART RAIN ===== */
+/* floating hearts */
 .heart{
   position:absolute;
-  font-size:22px;
-  animation:fall 6s linear infinite;
+  animation:float 6s linear infinite;
 }
-@keyframes fall{
-  from{transform:translateY(-10vh) scale(1);opacity:1}
-  to{transform:translateY(110vh) scale(1.6);opacity:0}
+@keyframes float{
+  from{transform:translateY(110vh) scale(1);opacity:1}
+  to{transform:translateY(-10vh) scale(1.6);opacity:0}
 }
 
-/* ===== MAIN CARD ===== */
+/* MAIN CARD */
 .card{
   position:absolute;
   top:50%;left:50%;
@@ -64,33 +52,55 @@ body{
 h1{
   font-family:'Pacifico';
   font-size:30px;
-  text-shadow:0 0 20px #ff5da2;
+  text-shadow:0 0 20px hotpink;
 }
 p{font-size:14px;margin:8px 0}
 
-/* ===== SLIDESHOW ===== */
+/* SLIDESHOW */
 .slide{
-  width:100%;height:230px;
+  width:100%;
+  height:230px;
   border-radius:22px;
   overflow:hidden;
   margin:15px 0;
-  box-shadow:0 0 25px #000;
+  position:relative;
 }
 .slide img{
-  width:100%;height:100%;
+  width:100%;
+  height:100%;
   object-fit:cover;
-  animation:zoom 2.5s ease;
+  animation:zoom 2s ease;
 }
 @keyframes zoom{
   from{transform:scale(1.2);opacity:0}
   to{transform:scale(1);opacity:1}
 }
 
-/* ===== BUTTONS ===== */
-.btns{display:flex;justify-content:center;gap:15px}
+/* STICKER */
+.sticker{
+  position:absolute;
+  right:-20px;
+  bottom:-20px;
+  width:90px;
+  transform:rotate(-15deg);
+  filter:drop-shadow(0 0 15px hotpink);
+  animation:bounce 2s infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0) rotate(-15deg)}
+  50%{transform:translateY(-10px) rotate(-10deg)}
+}
+
+/* BUTTONS */
+.btns{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+}
 button{
   padding:12px 22px;
-  border:none;border-radius:30px;
+  border:none;
+  border-radius:30px;
   font-size:15px;
   cursor:pointer;
 }
@@ -101,19 +111,21 @@ button{
   animation:pulse 1.2s infinite;
 }
 @keyframes pulse{
-  0%{transform:scale(1)}
   50%{transform:scale(1.15)}
-  100%{transform:scale(1)}
 }
 #no{
-  background:#fff;color:#ff005d;
+  background:#fff;
+  color:#ff005d;
 }
 
-/* ===== FINAL BLAST ===== */
+/* FINAL SCREEN */
 .final{
   display:none;
-  position:absolute;inset:0;
-  background:radial-gradient(circle,#ff005d,#000);
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),
+    url("file_00000000b01871faaa1784fc78c3bbc1.png") center/cover no-repeat;
   color:#fff;
   text-align:center;
 }
@@ -121,21 +133,20 @@ button{
   margin-top:40%;
   font-family:'Pacifico';
   font-size:34px;
-  text-shadow:0 0 40px #fff;
+  text-shadow:0 0 40px pink;
   animation:glow 1s infinite alternate;
 }
 @keyframes glow{
-  from{text-shadow:0 0 20px #fff}
-  to{text-shadow:0 0 60px #ffb3d9}
+  to{text-shadow:0 0 80px hotpink}
 }
 
-/* ===== CONFETTI ===== */
+/* CONFETTI */
 .confetti{
   position:absolute;
   width:8px;height:8px;
-  animation:conf 3s linear infinite;
+  animation:fall 3s linear infinite;
 }
-@keyframes conf{
+@keyframes fall{
   from{transform:translateY(-10vh) rotate(0)}
   to{transform:translateY(110vh) rotate(360deg)}
 }
@@ -144,14 +155,17 @@ button{
 
 <body>
 
-<div class="lights"></div>
+<audio id="music">
+  <source src="song.mp4">
+</audio>
 
 <div class="card">
   <h1>My Love ❤️</h1>
-  <p>From memories… to forever 💖</p>
+  <p>From memories to forever 💖</p>
 
   <div class="slide">
     <img id="img" src="265b1dab3a86b5abe74118388ef81344.jpg">
+    <img class="sticker" src="c9f514e8b86e043703c0682776bcb118.jpg">
   </div>
 
   <p>Will you be mine forever? 💍</p>
@@ -167,18 +181,23 @@ button{
 </div>
 
 <script>
-// HEART RAIN
+/* MUSIC */
+document.body.addEventListener("click",()=>{
+  document.getElementById("music").play();
+},{once:true});
+
+/* HEARTS */
 setInterval(()=>{
   const h=document.createElement("div");
   h.className="heart";
   h.innerHTML="💖";
   h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(16+Math.random()*24)+"px";
+  h.style.fontSize=(14+Math.random()*24)+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
-},250);
+},300);
 
-// SLIDESHOW (TAMARA NAAM)
+/* SLIDESHOW */
 const photos=[
  "265b1dab3a86b5abe74118388ef81344.jpg",
  "0364a08a488a424953c2a8114c61811d.jpg",
@@ -192,7 +211,7 @@ setInterval(()=>{
   document.getElementById("img").src=photos[i];
 },2200);
 
-// NO BUTTON BHAGODA 😈
+/* NO BUTTON BHAGODA */
 const no=document.getElementById("no");
 no.addEventListener("mouseover",()=>{
   no.style.position="absolute";
@@ -200,7 +219,7 @@ no.addEventListener("mouseover",()=>{
   no.style.top=Math.random()*80+"%";
 });
 
-// YES = FULL BLAST
+/* YES CLICK */
 function YES(){
   document.getElementById("final").style.display="block";
   for(let i=0;i<120;i++){
