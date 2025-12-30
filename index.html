@@ -2,234 +2,192 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>🔥 LOVE BLAST 🔥</title>
+<title>💖 Happy New Year My Love 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 body{
-  height:100vh;
-  background:
-    linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.6)),
-    url("file_00000000b01871faaa1784fc78c3bbc1.png") center/cover no-repeat;
-  overflow:hidden;
-  font-family:'Poppins',sans-serif;
+height:100vh;
+background:radial-gradient(circle at top,#ff7eb3,#1b0033);
+overflow:hidden;
+color:white;
 }
 
-/* floating hearts */
-.heart{
-  position:absolute;
-  animation:float 6s linear infinite;
+/* STARS */
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+background:url("https://i.imgur.com/7b1Kx4T.png");
+animation:moveStars 60s linear infinite;
+opacity:.4;
 }
-@keyframes float{
-  from{transform:translateY(110vh) scale(1);opacity:1}
-  to{transform:translateY(-10vh) scale(1.6);opacity:0}
+@keyframes moveStars{
+from{background-position:0 0}
+to{background-position:10000px 5000px}
 }
 
-/* MAIN CARD */
+/* CENTER */
+.container{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:90%;
+max-width:420px;
+text-align:center;
+z-index:2;
+}
+
+/* GLASS CARD */
 .card{
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:92%;max-width:380px;
-  padding:25px;
-  text-align:center;
-  color:#fff;
-  background:rgba(255,255,255,0.18);
-  backdrop-filter:blur(20px);
-  border-radius:28px;
-  box-shadow:0 0 60px #ff0080;
-  animation:pop 1s ease;
+backdrop-filter:blur(16px);
+background:rgba(255,255,255,.15);
+border-radius:30px;
+padding:25px;
+box-shadow:0 0 40px rgba(255,0,150,.5);
+animation:fadeUp 1.5s ease;
 }
-@keyframes pop{
-  from{transform:translate(-50%,-50%) scale(0)}
-  to{transform:translate(-50%,-50%) scale(1)}
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(30px)}
+to{opacity:1;transform:translateY(0)}
 }
 
 h1{
-  font-family:'Pacifico';
-  font-size:30px;
-  text-shadow:0 0 20px hotpink;
-}
-p{font-size:14px;margin:8px 0}
-
-/* SLIDESHOW */
-.slide{
-  width:100%;
-  height:230px;
-  border-radius:22px;
-  overflow:hidden;
-  margin:15px 0;
-  position:relative;
-}
-.slide img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  animation:zoom 2s ease;
-}
-@keyframes zoom{
-  from{transform:scale(1.2);opacity:0}
-  to{transform:scale(1);opacity:1}
+font-family:'Pacifico',cursive;
+font-size:2.2em;
+margin-bottom:10px;
 }
 
-/* STICKER */
-.sticker{
-  position:absolute;
-  right:-20px;
-  bottom:-20px;
-  width:90px;
-  transform:rotate(-15deg);
-  filter:drop-shadow(0 0 15px hotpink);
-  animation:bounce 2s infinite;
-}
-@keyframes bounce{
-  0%,100%{transform:translateY(0) rotate(-15deg)}
-  50%{transform:translateY(-10px) rotate(-10deg)}
+p{
+font-size:.95em;
+line-height:1.7;
 }
 
-/* BUTTONS */
-.btns{
-  display:flex;
-  justify-content:center;
-  gap:15px;
+/* HEART */
+.heart{
+font-size:65px;
+margin:18px 0;
+cursor:pointer;
+animation:beat 1.4s infinite;
 }
+@keyframes beat{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.25)}
+}
+
+/* BUTTON */
 button{
-  padding:12px 22px;
-  border:none;
-  border-radius:30px;
-  font-size:15px;
-  cursor:pointer;
+margin-top:15px;
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:linear-gradient(45deg,#ff4da6,#ff85c2);
+color:white;
+font-size:1em;
+cursor:pointer;
+box-shadow:0 0 20px rgba(255,0,150,.6);
+transition:.3s;
 }
-#yes{
-  background:#ff005d;
-  color:#fff;
-  box-shadow:0 0 25px #ff005d;
-  animation:pulse 1.2s infinite;
-}
-@keyframes pulse{
-  50%{transform:scale(1.15)}
-}
-#no{
-  background:#fff;
-  color:#ff005d;
-}
-
-/* FINAL SCREEN */
-.final{
-  display:none;
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),
-    url("file_00000000b01871faaa1784fc78c3bbc1.png") center/cover no-repeat;
-  color:#fff;
-  text-align:center;
-}
-.final h2{
-  margin-top:40%;
-  font-family:'Pacifico';
-  font-size:34px;
-  text-shadow:0 0 40px pink;
-  animation:glow 1s infinite alternate;
-}
-@keyframes glow{
-  to{text-shadow:0 0 80px hotpink}
-}
+button:hover{transform:scale(1.08)}
 
 /* CONFETTI */
 .confetti{
-  position:absolute;
-  width:8px;height:8px;
-  animation:fall 3s linear infinite;
+position:fixed;
+top:-10px;
+font-size:20px;
+animation:fall linear forwards;
 }
 @keyframes fall{
-  from{transform:translateY(-10vh) rotate(0)}
-  to{transform:translateY(110vh) rotate(360deg)}
+to{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* MUSIC ICON */
+.music{
+position:fixed;
+bottom:15px;
+right:15px;
+font-size:30px;
+animation:spin 4s linear infinite;
+}
+@keyframes spin{
+to{transform:rotate(360deg)}
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music">
-  <source src="song.mp4">
+<div class="stars"></div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+<source src="Tu_hain_to_Female_version_status_lovesongstatus_Koi_nhi_mera_zarurat_teri_status_femaleversion_48KBPS.mp4" type="audio/mp4">
 </audio>
 
+<div class="container">
 <div class="card">
-  <h1>My Love ❤️</h1>
-  <p>From memories to forever 💖</p>
+<h1>Happy New Year My Love 🎆💖</h1>
 
-  <div class="slide">
-    <img id="img" src="265b1dab3a86b5abe74118388ef81344.jpg">
-    <img class="sticker" src="c9f514e8b86e043703c0682776bcb118.jpg">
-  </div>
+<p>
+Iss naye saal me sirf ek hi wish hai meri 🥺💕<br>
+<strong>Tu hamesha meri rahe… aur main hamesha tera.</strong><br><br>
 
-  <p>Will you be mine forever? 💍</p>
+🌸 Main wada karti hoon:<br>
+💖 Har mood me tera saath dungi<br>
+🤗 Har aansu me tera haath pakadungi<br>
+🌈 Har dream ko tera banaungi<br><br>
 
-  <div class="btns">
-    <button id="yes" onclick="YES()">YES 😍</button>
-    <button id="no">NO 🙈</button>
-  </div>
+Tu sirf mera pyaar nahi…<br>
+<strong>meri zarurat, meri aadat, meri duniya hai 💞</strong>
+</p>
+
+<div class="heart" onclick="heartBlast()">💓</div>
+
+<p style="font-size:12px;opacity:.8">💓 Hold / Tap the heart</p>
+
+<button onclick="celebrate()">YES, FOREVER 😘</button>
+</div>
 </div>
 
-<div class="final" id="final">
-  <h2>🎆 HAPPY NEW YEAR MY LOVE 🎆<br>FOREVER & ALWAYS 😘❤️</h2>
-</div>
+<div class="music">🎶</div>
 
 <script>
-/* MUSIC */
-document.body.addEventListener("click",()=>{
-  document.getElementById("music").play();
+/* PLAY MUSIC ON TOUCH */
+document.addEventListener("click",()=>{
+document.getElementById("bgMusic").play();
 },{once:true});
 
-/* HEARTS */
-setInterval(()=>{
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="💖";
-  h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(14+Math.random()*24)+"px";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-},300);
+/* HEART EFFECT */
+function heartBlast(){
+for(let i=0;i<12;i++){
+let h=document.createElement("div");
+h.innerHTML="💖";
+h.style.position="fixed";
+h.style.left=Math.random()*100+"vw";
+h.style.top="50%";
+h.style.fontSize="24px";
+h.style.animation="fall 2s linear";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),2000);
+}
+}
 
-/* SLIDESHOW */
-const photos=[
- "265b1dab3a86b5abe74118388ef81344.jpg",
- "0364a08a488a424953c2a8114c61811d.jpg",
- "2b0d88bd902278d6b32358aa5b376675.jpg",
- "2740a6b74d594baebaf48f69560390bd.jpg",
- "621253e0bf313391209a06807bebfe59.jpg"
-];
-let i=0;
-setInterval(()=>{
-  i=(i+1)%photos.length;
-  document.getElementById("img").src=photos[i];
-},2200);
-
-/* NO BUTTON BHAGODA */
-const no=document.getElementById("no");
-no.addEventListener("mouseover",()=>{
-  no.style.position="absolute";
-  no.style.left=Math.random()*80+"%";
-  no.style.top=Math.random()*80+"%";
-});
-
-/* YES CLICK */
-function YES(){
-  document.getElementById("final").style.display="block";
-  for(let i=0;i<120;i++){
-    const c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),3000);
-  }
+/* CELEBRATION */
+function celebrate(){
+for(let i=0;i<80;i++){
+let c=document.createElement("div");
+c.className="confetti";
+c.innerHTML=["💖","🎉","✨","🥰","💞"][Math.floor(Math.random()*5)];
+c.style.left=Math.random()*100+"vw";
+c.style.animationDuration=2+Math.random()*3+"s";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),5000);
+}
+alert("💍 I Promise You… Forever & Always 💖");
 }
 </script>
 
