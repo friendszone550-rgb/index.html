@@ -83,19 +83,6 @@ animation:beat 1.2s infinite;
 
 audio{display:none}
 </style>
-</head>
-
-/* FLOATING EMOJIS (NO LINE ISSUE) */
-setInterval(()=>{
-let f=document.createElement("div");
-f.className="float";
-f.innerHTML=["💙","✨","🤍","🌌"][Math.floor(Math.random()*4)];
-f.style.left=Math.random()*100+"vw";
-f.style.fontSize=14+Math.random()*20+"px";
-f.style.animationDuration=6+Math.random()*6+"s";
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),12000);
-},500);
 
 <div class="card show" id="card">
 <h1>Happy New Year 🎆</h1>
@@ -171,7 +158,19 @@ ${control}
 card.classList.add("show");
 },500);
 }
+  /* FLOATING EMOJIS (NO LINE ISSUE, NO WHITE) */
+setInterval(()=>{
+let f=document.createElement("div");
+f.className="float";
+f.innerHTML=["💙","✨","💫","🌌"][Math.floor(Math.random()*4)];
+f.style.left=Math.random()*100+"vw";
+f.style.fontSize=14+Math.random()*20+"px";
+f.style.animationDuration=6+Math.random()*6+"s";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),12000);
+},600);
 </script>
+  
 
 </body>
 </html>
